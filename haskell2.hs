@@ -1,4 +1,6 @@
 
+import Data.Char
+
 fgeneral :: (a->b) -> [a] -> [b]
 fgeneral _ [] = []
 fgeneral y (x:xs) = y x : fgeneral y xs
@@ -89,5 +91,46 @@ sumOfMin' xs = sum' (map min' xs)
 sums :: ([Int] -> Int) -> [[Int]] -> Int
 sums m xs = sum' (map m xs)
 
-yell :: [Char] -> [Char]
-yell xs = map toUpper xs
+yell' :: String -> String
+yell' xs = map toUpper xs 
+
+whisper :: String -> String
+whisper xs = map toLower xs
+
+
+evaluarTotal :: Int -> String
+evaluarTotal x
+            |x > 0 = "gano"
+            |x == 0 = "Balance"
+            |otherwise ="Perdio"
+            
+ganancia :: [Int] -> String
+ganancia xs = 
+            let total = foldr' (+) xs 0
+            in evaluarTotal total
+--            in if(total > 0) then "Gano"
+--                             else if(total == 0) then "Balance"
+--                                                 else "Perdio"
+                  
+                               
+twice :: (a -> a) -> a -> a
+twice f xs = f(f xs)
+
+--ordenamiento
+--cuanto tiempo demoro en ordenar quicksort: el mejor algoritmo de ordenamiento en casos generales. El mas rapidos
+
+--valor cualquiera de la lista que vamos a llamar pibot. A la derecha vamos a poner todos los mayores a pibot y a la Izquierda todos los menores a pibot.
+
+--quicksort'              quicksort' Los ordenamos(llamado recursivo)
+
+--ePivot ++ [Pibot] ++ Dpivot
+
+
+quicksort' :: [Int] -> [Int]
+quicksort' [] = []
+quicksort' (x:xs) = let men= [k|k <-xs, k<=x]
+                        may= [k|k <-xs, k> x]
+                    in (quicksort' men) ++ [x] ++ (quicksort' may)
+                    
+longitudes :: [String] -> [String]
+longitudes
