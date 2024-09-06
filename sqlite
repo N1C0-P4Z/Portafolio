@@ -1,0 +1,23 @@
+SELECT nombre, apellido ,id
+FROM alumnos
+WHERE id >= 10 AND id <=20;
+
+SELECT id_alumno, nota
+FROM notas 
+INNER JOIN alumnos ON notas.id_alumno = alumnos.id
+WHERE alumnos.id = 201 and notas.materia like "Matematica";
+
+SELECT nombre, apellido
+FROM alumnos
+WHERE apellido LIKE "%es";
+
+SELECT apellido, nombre, i.idioma
+FROM alumnos
+INNER JOIN alumnos_idiomas ai ON alumnos.id = ai.id_alumno
+INNER JOIN idiomas i ON ai.id_idioma = i.id
+WHERE i.idioma like "Frances";
+
+SELECT apellido 
+FROM alumnos
+INNER JOIN alumnos_idiomas ai ON alumnos.id = ai.id_alumno
+INNER JOIN idiomas i ON ai.id_idioma = i.idioma
