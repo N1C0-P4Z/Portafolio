@@ -123,14 +123,48 @@ twice f xs = f(f xs)
 
 --quicksort'              quicksort' Los ordenamos(llamado recursivo)
 
---ePivot ++ [Pibot] ++ Dpivot
+--ePivot ++ [Pibot] ++ Dpivotg
 
 
 quicksort' :: [Int] -> [Int]
 quicksort' [] = []
 quicksort' (x:xs) = let men= [k|k <-xs, k<=x]
-                        may= [k|k <-xs, k> x]
+                        may= [k|k <-xs, k > x]
                     in (quicksort' men) ++ [x] ++ (quicksort' may)
                     
-longitudes :: [String] -> [String]
-longitudes
+--longitudes :: [String] -> [String]
+--longitudes
+
+--pepito :: Int -> Int
+--pepito x y quicksrot2 xs pepito
+--        |y < n = -1
+--        |y == x = 0
+--       |y > x = 1
+quicksort2 :: [Int] -> (Int -> Int -> Int) -> [Int]
+quicksort2 [] _ = []
+quicksort2 (x:xs) f = let menores = filter(\k -> f x k == -1) xs
+                          mayores = filter(\k -> f x k == 1) xs
+                          iguales = filter(\k -> f x k == 0) xs
+                      in quicksort2 menores f ++ quicksort2 iguales f ++ [x] ++ quicksort2 mayores f
+
+--Practica 5
+-- 1)
+proporcion3 :: [Int] -> Int -> Int -> Int -> Float 
+proporcion3 xs a b c = let golesa = length ( filter' (== a) xs) 
+                           golesb = length ( filter' (== b) xs)
+                           golesc = length ( filter' (== c) xs)
+                               
+                           total = length xs
+                       in if(total == 0) then 0.0
+                                         else (fromIntegral(golesa + golesb + golesc)/fromIntegral total)  
+                                         
+goles3 :: [Int] -> Int -> Int -> Int -> (Int, Int, Int)
+goles3 xs a b c = let golesa = length (filter' (==a) xs)
+                      golesb = length (filter' (==b) xs) 
+                      golesc = length (filter' (==c) xs)
+                      
+                  in (golesa, golesb, golesc)
+                  
+-- 2)
+
+tomarDescanso :: 
