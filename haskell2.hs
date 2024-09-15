@@ -165,52 +165,58 @@ goles3 xs a b c = let golesa = length (filter' (==a) xs)
                       
                   in (golesa, golesb, golesc)
                   
--- 2)
---tomarDescanso :: [[(String,Int)]] -> String
---tomarDescanso [] = error "Lista Vacía"
---tomarDescanso [_] = error "Debe haber al menos 2 pueblos para tomar el descanso"
---tomarDescanso (x:y:xs) =
---		let 
---			calcularDistancias :: [[(String,Int)]] -> [Int]
---			calcularDistancias _ = []
---			calcularDistancias (a:b:ys) = (snd b - snd a) : calcularDistancias (b:ys)
---			
---			dist = calcularDistancias (a:(y:xs))
---			dist_clasificadas = zip dist [1..]
---			mayor_dist = max dist_clasificadas
---			mayor_dist_clasificada = snd mayor_dist
---		in
---			fst (y:xs !! (mayor_dist_clasificada -1))
+--2)
+ 
+calcularDistancias :: [(String,Int)] -> [(String,Int)]
+calcularDistancias [_] = []
+calcularDistancias (a:b:xs) = (fst b,snd b - snd a): calcularDistancias (b:xs)
+			
+tomarDescanso :: [(String,Int)] -> String
+tomarDescanso xs = fst(foldr' maximo (calcularDistancias xs)("",minBound))
+			
+cantPueblos :: [(String,Int)] -> Int -> Int
+cantPueblos xs k = length(filter'(\x -> if(snd x <= 10*k) then True else False) xs)
+
 
 --3)
 
-mejoresDonantes :: [(String,[Int])] -> Int -> [String]
-mejoresDonantes donantes d = map fst(filter(\(name,dona) -> name /= "Anonimo" && sum' dona > d) donantes)
+maximo :: (String,Int) -> (String,Int) -> (String,Int)
+maximo x y = if (snd x > snd y) then x else y
 
---mayorDonante :: [(String, [Int])] -> Int -> String
---mayorDonante donantes d =
---			let 
---				nameMejores = mejoresDonantes donantes d
---				
---				filtrar_donantes = filter (\(name,_) -> name 'x' nameMejores) donantes
---				
---				maxAux [] = []
---				maxAux [x] = x
---				maxAux (x:xs) = let (nameX, donaX) = x
---						    (nameMax, donaMax) = maxAux xs
---						in if((sum' donaX) > (sum' donaMax)) then x
---										     else (nameMax, donaMax)
---				(nameMayorDonante,_) = maxAux filtrar_donantes
---			in
---				nameMayorDonante
---				
+mejoresDonantes :: [(String,[Int])] -> Int -> [String]
+mejoresDonantes donantes d = map fst(filter(\(x,y) -> x /= "Anonimo" && sum' y > d) donantes)
+
+mayorDonante' :: [(String,[Int])] -> String
+mayorDonante' xs = fst (foldr'(map'(\(q,p) -> (q,sum' p)(filter'(\k -> if(fst k /= "Anonimo") then True else False) xs)) ("",minBound)(\ x y -> if(snd x > snd y) then x else y)
 
 --4)
-
-corroborarBool :: [Bool] -> String
+{-corroborarBool :: [Bool] -> String
 corroborarBool [] = "Lista Vacia"
 corroborarBool xs
 		| and xs = "tautologia"
 		| or xs = "satisfactible"
 		| otherwise = "contradiccion"
 		
+corroborarBool2 :: [Bool] -> String
+corroborarBool2 [] = "Lista Vacia"
+corroborarBool2 xs
+		|allTrue  = "tautologia"
+		|anyTrue  = "satisfactible"
+		|otherwise = "contradiccion"
+		where
+			allTrue = null(filter'(\x -> x == False) xs)
+			anyTrue = not(null(filter' (\x -> x== True) xs))
+
+corroborarBool3 :: [Bool] -> String
+corroborarBool3 [] = "Lista Vacia"
+corroborarBool3 xs
+		| filter' (\x-> if(x==True)then False else True) xs==[] = "tautologia"
+		| filter' (\x-> if(x==False)then False else True) xs==[] = "contradiccion"
+		| otherwise = "satisfactible"-}
+		
+--5)
+--cerradurasAbiertas :: [Bool] -> Int
+--cerradurasAbiertas xs = length(filter'(\x -> x == True) xs)
+
+--cerradurasCerradas :: [Bool] -> Bool
+--cerradurasCerradas xs = length(filter'(\x -> x == True) xs) == 0
