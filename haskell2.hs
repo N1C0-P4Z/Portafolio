@@ -166,5 +166,51 @@ goles3 xs a b c = let golesa = length (filter' (==a) xs)
                   in (golesa, golesb, golesc)
                   
 -- 2)
+--tomarDescanso :: [[(String,Int)]] -> String
+--tomarDescanso [] = error "Lista Vacía"
+--tomarDescanso [_] = error "Debe haber al menos 2 pueblos para tomar el descanso"
+--tomarDescanso (x:y:xs) =
+--		let 
+--			calcularDistancias :: [[(String,Int)]] -> [Int]
+--			calcularDistancias _ = []
+--			calcularDistancias (a:b:ys) = (snd b - snd a) : calcularDistancias (b:ys)
+--			
+--			dist = calcularDistancias (a:(y:xs))
+--			dist_clasificadas = zip dist [1..]
+--			mayor_dist = max dist_clasificadas
+--			mayor_dist_clasificada = snd mayor_dist
+--		in
+--			fst (y:xs !! (mayor_dist_clasificada -1))
 
-tomarDescanso :: 
+--3)
+
+mejoresDonantes :: [(String,[Int])] -> Int -> [String]
+mejoresDonantes donantes d = map fst(filter(\(name,dona) -> name /= "Anonimo" && sum' dona > d) donantes)
+
+--mayorDonante :: [(String, [Int])] -> Int -> String
+--mayorDonante donantes d =
+--			let 
+--				nameMejores = mejoresDonantes donantes d
+--				
+--				filtrar_donantes = filter (\(name,_) -> name 'x' nameMejores) donantes
+--				
+--				maxAux [] = []
+--				maxAux [x] = x
+--				maxAux (x:xs) = let (nameX, donaX) = x
+--						    (nameMax, donaMax) = maxAux xs
+--						in if((sum' donaX) > (sum' donaMax)) then x
+--										     else (nameMax, donaMax)
+--				(nameMayorDonante,_) = maxAux filtrar_donantes
+--			in
+--				nameMayorDonante
+--				
+
+--4)
+
+corroborarBool :: [Bool] -> String
+corroborarBool [] = "Lista Vacia"
+corroborarBool xs
+		| and xs = "tautologia"
+		| or xs = "satisfactible"
+		| otherwise = "contradiccion"
+		
