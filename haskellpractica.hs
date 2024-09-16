@@ -85,6 +85,13 @@ ganancia xs = let total = foldr' (+) xs 0
 twice' :: (a -> a) -> a -> a
 twice' f xs = f(f xs)
 
+aux1 :: Int -> Int -> Int
+aux1 x y 
+	|y < x = -1
+	|y == x = 0
+	|y > x = 1
+	
+	
 quicksort2 :: [Int] -> (Int -> Int -> Int) -> [Int]
 quicksort2 [] _ = []
 quicksort2 (x:xs) f = let men = filter'(\k -> f x k == -1) xs
@@ -98,8 +105,65 @@ longitudes (x:xs) = let men = filter'(\k -> length k <= length x) xs
 			may = filter'(\k -> length k > length x) xs
 		
 		    in longitudes men ++ [x] ++ longitudes may 
-		    
+--3)
+proporcion3::[Int]->Int->Int->Int->Float
+proporcion3 xs a b c = let 
+			total = length xs
+			goles3 = length(filter' (\x -> x==a||x==b||x==c) xs)
+			in fromIntegral goles3 / fromIntegral total
+			
+foldl' :: (b -> a -> a) -> [a] -> b -> b
+foldl' _ [] k = k
+foldl' f (x:xs) k = foldl' f xs ( f k x)
 --6)
 
-precioPlato :: 
+precioPlato :: String -> Int
+precioPlato "Arroz con Pollo" = 3000
+precioPlato "Carne con Papa" = 4000
+precioPlato "Milanesas" = 2000
+precioPlato "Hamburguesas" = 5000
+precioPlato _ = 0
 
+precioTotal :: [String] -> Int
+precioTotal xs = sum'(map' precioPlato xs)
+
+--7)
+
+aprobados :: [Int] -> Int
+aprobados xs = length(filter' (\xs -> xs >= 6)xs)
+
+promedioNotas :: [Int] -> Float
+promedioNotas xs = let notavalida = filter'(\ xs -> xs /= 0) xs
+		   in if length notavalida == 0 then 0
+		   		                else fromIntegral(sum' notavalida)/ fromIntegral(length notavalida)
+		   		                
+alfabeticamente :: [String] -> [String]
+alfabeticamente [] = []
+alfabeticamente (x:xs) = let men= [y |y <- xs, y < x]
+			     may= [y |y <- xs, y >= x]
+			     
+			  in alfabeticamente men ++ [x] ++ alfabeticamente may
+			  
+maximo :: (String,Int) -> (String,Int) -> (String,Int)
+maximo x y = if (snd x > snd y) then x else y
+
+calcularDistancias :: [(String,Int)] -> [(String,Int)]
+calcularDistancias [_] = []
+calcularDistancias (a:b:xs) = (fst b,snd b - snd a): calcularDistancias (b:xs)
+			
+tomarDescanso :: [(String,Int)] -> String
+tomarDescanso xs = fst(foldr' maximo (calcularDistancias xs)("",minBound))
+			
+cantPueblos :: [(String,Int)] -> Int -> Int
+cantPueblos xs k = length(filter'(\x -> if(snd x <= 10*k) then True else False) xs)
+
+--1) 
+proporcion3 :: [Int] -> Int -> Int -> Int -> Float
+proporcion3 xs a b c = let 
+			   total = lenght xs
+			   goles = lenght(filter'(\k -> k==a || k==b || k==c)xs)
+			in fromIntegral goles / fromIntegral total
+			
+maximo :: (String,Int) -> (String,Int) -> (String,Int)
+maximo x y = if (snd x > snd y) then x else ymaximo :: (String,Int) -> (String,Int) -> (String,Int)
+maximo x y = if (snd x > snd y) then x else y  
