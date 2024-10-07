@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 void ordBurbuja1(float *a,int n);
@@ -44,7 +44,7 @@ void ordBurbuja1(float *a, int n)
             }
         i = indiceIntercambio;
     }
-}*/
+}
 
 #include <stdio.h>
 #include <stdlib.h>

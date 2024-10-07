@@ -1,4 +1,4 @@
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int factorial(int n);
@@ -18,9 +18,9 @@ int factorial(int n)
         return 1;
     else
         return n * factorial(n -1);
-}*/
+}
 
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 int sumaNenteros(int n);
 
@@ -41,9 +41,9 @@ int sumaNenteros(int n)
         return 1;
     else
         return n + sumaNenteros(n-1);
-}*/
+}
 
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 int sumaPares(int n);
@@ -68,9 +68,9 @@ int sumaPares(int n)
     }else{
         return sumaPares(n-1);
     }
-}*/
+}
 
-/*#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 float multiplicarArreglo(float array[], int n);
@@ -98,7 +98,7 @@ float multiplicarArreglo(float array[], int n)
         return 1.0;
     else   
         return array[0] * multiplicarArreglo(array + 1, n -1);
-}*/
+}
 
 #include <stdio.h>
 #include <stdlib.h>

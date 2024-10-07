@@ -1,0 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+int sumaNenteros(int n);
+
+int main()
+{   
+    int n;
+    printf("Ingrese un numero: ");
+    scanf("%d", &n);
+
+    printf("La suma de los primeros %d enteros es %d\n", n, sumaNenteros(n));
+
+    return 0;
+}
