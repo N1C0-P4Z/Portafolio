@@ -39,13 +39,13 @@ void getAlumno(alumno array[], int n)
         printf("Ingrese el nombre del alumno %d: ",i);
         scanf("%s", array[i].nombre);
         getchar();
-        printf("Ingrese el nombre del alumno %d: ",i);
+        printf("Ingrese el apellido del alumno %d: ",i);
         scanf("%s", array[i].apellido);
         printf("Ingrese la edad del alumno %d: ",i);
         scanf("%d", &array[i].edad);
         for(int j = 0; j < 3; j++){
             printf("Ingrese la nota %d del alumno %d: ",j,i);
-            scanf("%f", array[i].notas[j]);
+            scanf("%f", &array[i].notas[j]);
         }
         printf("\n");
     }
