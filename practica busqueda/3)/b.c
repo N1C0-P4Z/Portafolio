@@ -48,7 +48,6 @@ void getAlumno(estudiante array[], int n)
 }
 
 
-
 int busquedaSecuencial(estudiante array[], int n, char clave[])
 {   
     for(int i = 0; i < n; i++){
